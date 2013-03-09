@@ -22,6 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0C8D14
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D6A7C529-0CB6-4A29-8ABB-E58301ECBF64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Compression.AspNet.Samples", "SignalR.Compression.AspNet.Samples\SignalR.Compression.AspNet.Samples.csproj", "{ADC4977F-1594-41D9-A014-8B1F793A60E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +56,10 @@ Global
 		{198E37B7-8004-4CCC-9E61-6DAF13AD931C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{198E37B7-8004-4CCC-9E61-6DAF13AD931C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{198E37B7-8004-4CCC-9E61-6DAF13AD931C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC4977F-1594-41D9-A014-8B1F793A60E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC4977F-1594-41D9-A014-8B1F793A60E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC4977F-1594-41D9-A014-8B1F793A60E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC4977F-1594-41D9-A014-8B1F793A60E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,5 +68,6 @@ Global
 		{F63F4E9D-EFCC-4777-B147-051707B0BB8B} = {13905E1D-962E-41B2-B43D-ED0A0E4A2A37}
 		{48A85D6D-F2D0-45AD-8793-F2317643D60D} = {13905E1D-962E-41B2-B43D-ED0A0E4A2A37}
 		{198E37B7-8004-4CCC-9E61-6DAF13AD931C} = {13905E1D-962E-41B2-B43D-ED0A0E4A2A37}
+		{ADC4977F-1594-41D9-A014-8B1F793A60E3} = {D6A7C529-0CB6-4A29-8ABB-E58301ECBF64}
 	EndGlobalSection
 EndGlobal

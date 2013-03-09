@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public static class TypeExtensions
     {

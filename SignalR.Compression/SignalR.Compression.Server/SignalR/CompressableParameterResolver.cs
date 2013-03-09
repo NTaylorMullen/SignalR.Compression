@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNet.SignalR.Json;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public class CompressableParameterResolver : IParameterResolver
     {

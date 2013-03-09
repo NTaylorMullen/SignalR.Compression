@@ -3,7 +3,7 @@ using System.Collections;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json.Linq;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public class DefaultPayloadDecompressor : IPayloadDecompressor
     {

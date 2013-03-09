@@ -6,7 +6,7 @@ using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNet.SignalR.Json;
 using Newtonsoft.Json.Linq;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public class DefaultContractsGenerator : IContractsGenerator
     {

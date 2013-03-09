@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public class ContractedClientHubInvocation : ClientHubInvocation
     {

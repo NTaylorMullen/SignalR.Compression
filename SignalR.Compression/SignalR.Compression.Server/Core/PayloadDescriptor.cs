@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public class PayloadDescriptor
     {

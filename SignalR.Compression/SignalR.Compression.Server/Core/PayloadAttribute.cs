@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     /// <summary>
     /// Apply to classes or interfaces that represent data to be sent down to client

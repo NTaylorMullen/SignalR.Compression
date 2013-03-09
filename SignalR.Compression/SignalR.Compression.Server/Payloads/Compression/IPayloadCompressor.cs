@@ -1,5 +1,5 @@
 ﻿
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public interface IPayloadCompressor
     {

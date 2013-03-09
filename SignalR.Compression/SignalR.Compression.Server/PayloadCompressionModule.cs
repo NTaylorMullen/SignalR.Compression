@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public class PayloadCompressionModule : HubPipelineModule
     {
@@ -23,16 +24,6 @@ namespace SignalR.Compression
             _compressor = compressor;
             _provider = provider;
             _generator = generator;
-        }
-
-        public override Func<Dictionary<string, object>, Dictionary<string, object>> BuildNegotiate(Func<Dictionary<string, object>, Dictionary<string, object>> negotiate)
-        {
-            return response =>
-            {
-                response["Contracts"] = _generator != null ? _generator.GenerateContracts() : null;
-
-                return negotiate(response);
-            };
         }
 
         public override Func<IHubIncomingInvokerContext, Task<object>> BuildIncoming(Func<IHubIncomingInvokerContext, Task<object>> invoke)

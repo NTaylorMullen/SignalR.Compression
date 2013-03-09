@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public interface IPayloadDescriptorProvider
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public class DataDescriptor
     {

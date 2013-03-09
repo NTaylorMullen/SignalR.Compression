@@ -6,7 +6,7 @@ using System.Threading;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public class ReflectedPayloadDescriptorProvider : IPayloadDescriptorProvider
     {

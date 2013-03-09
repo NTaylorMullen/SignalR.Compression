@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.SignalR;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
     public class DefaultPayloadCompressor : IPayloadCompressor
     {
