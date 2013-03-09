@@ -1,22 +1,18 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.md in the project root for license information.
-
-using System;
-using SignalR.Compression;
-using Microsoft.AspNet.SignalR.Hubs;
-using Microsoft.AspNet.SignalR.Infrastructure;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
+using System.Web.Routing;
 
-namespace SignalR.Compression
+namespace SignalR.Compression.Server
 {
-    public static class HubPipelineExtensions
-    {        
-        public static void CompressPayloads(this IHubPipeline pipeline)
+    public class CompressionBase
+    {
+        public void CompressPayloads(RouteCollection routes)
         {
-            if (pipeline == null)
-            {
-                throw new ArgumentNullException("pipeline");
-            }
-
             var resolver = GlobalHost.DependencyResolver;
 
             var payloadDescriptorProvider = new Lazy<ReflectedPayloadDescriptorProvider>(() => new ReflectedPayloadDescriptorProvider(resolver));
@@ -34,7 +30,9 @@ namespace SignalR.Compression
             var parameterBinder = new Lazy<CompressableParameterResolver>(() => new CompressableParameterResolver(payloadDescriptorProvider.Value, payloadDecompressor.Value));
             resolver.Register(typeof(IParameterResolver), () => parameterBinder.Value);
 
-            pipeline.AddModule(new PayloadCompressionModule(resolver.Resolve<IPayloadCompressor>(), resolver.Resolve<IPayloadDescriptorProvider>()));
+            routes.MapConnection<ContractEndpoint>("contracts", "contracts");
+
+            resolver.Resolve<IHubPipeline>().AddModule(new PayloadCompressionModule(resolver.Resolve<IPayloadCompressor>(), resolver.Resolve<IPayloadDescriptorProvider>(), resolver.Resolve<IContractsGenerator>()));
         }
     }
 }
