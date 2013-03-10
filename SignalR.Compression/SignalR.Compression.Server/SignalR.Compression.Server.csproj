@@ -74,7 +74,6 @@
     <Compile Include="Core\PayloadAttribute.cs" />
     <Compile Include="Core\PayloadDescriptor.cs" />
     <Compile Include="Extensions\DependencyResolverExtensions.cs" />
-    <Compile Include="Extensions\HubPipelineExtensions.cs" />
     <Compile Include="Extensions\TaskAsyncHelper.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="PayloadCompressionModule.cs" />

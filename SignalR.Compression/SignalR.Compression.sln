@@ -25,6 +25,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D6A7C529-0CB6-4A29-8ABB-E58301ECBF64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Compression.AspNet.Samples", "SignalR.Compression.AspNet.Samples\SignalR.Compression.AspNet.Samples.csproj", "{ADC4977F-1594-41D9-A014-8B1F793A60E3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F74C4622-3244-4BB5-BFE7-2AA14F492096} = {F74C4622-3244-4BB5-BFE7-2AA14F492096}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
