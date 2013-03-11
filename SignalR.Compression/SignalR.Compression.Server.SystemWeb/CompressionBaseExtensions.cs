@@ -4,9 +4,9 @@ namespace SignalR.Compression.Server.SystemWeb
 {
     public static class CompressionBaseExtensions
     {
-        public void CompressPayloads(this CompressionBase compressionBase, RouteCollection routes)
+        public static void CompressPayloads(this CompressionBase compressionBase, RouteCollection routes)
         {
-            routes.MapConnection<ContractEndpoint>("contracts", "contracts");
+            routes.MapConnection<ContractEndpoint>("compression/contracts", "compression/contracts");
 
             compressionBase.CompressPayloads();
         }
