@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B038C58A-BAFE-4E59-91D3-563EF7D71992}</ProjectGuid>
+    <ProjectGuid>{B874AB95-D7DD-404B-AC0D-9CF150DD4A3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SignalR.Compression.Server</RootNamespace>
-    <AssemblyName>SignalR.Compression.Server</AssemblyName>
+    <RootNamespace>SignalR.Compression.Server.SystemWeb</RootNamespace>
+    <AssemblyName>SignalR.Compression.Server.SystemWeb</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -32,13 +32,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.1.0.1\lib\net40\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.AspNet.SignalR.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Owin.1.0.1\lib\net45\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.1.0.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.1.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,31 +64,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompressionBase.cs" />
-    <Compile Include="Contracts\DefaultContractsGenerator.cs" />
-    <Compile Include="Contracts\IContractsGenerator.cs" />
-    <Compile Include="Core\ContractedClientHubInvocation.cs" />
-    <Compile Include="Core\DataDescriptor.cs" />
-    <Compile Include="Core\PayloadAttribute.cs" />
-    <Compile Include="Core\PayloadDescriptor.cs" />
-    <Compile Include="Extensions\DependencyResolverExtensions.cs" />
-    <Compile Include="Extensions\TaskAsyncHelper.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="PayloadCompressionModule.cs" />
-    <Compile Include="Payloads\Compression\CompressionSettings.cs" />
-    <Compile Include="Payloads\Compression\DefaultPayloadCompressor.cs" />
-    <Compile Include="Payloads\Compression\IPayloadCompressor.cs" />
-    <Compile Include="Payloads\Decompression\DefaultPayloadDecompressor.cs" />
-    <Compile Include="Payloads\Decompression\IPayloadDecompressor.cs" />
-    <Compile Include="Payloads\IPayloadDescriptorProvider.cs" />
-    <Compile Include="Payloads\ReflectedPayloadDescriptorProvider.cs" />
+    <Compile Include="CompressionBaseExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignalR\CompressableParameterResolver.cs" />
-    <Compile Include="Core\ExternalHubOutgoingInvokerContext.cs" />
-    <Compile Include="SignalR\ContractEndpoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SignalR.Compression.Server\SignalR.Compression.Server.csproj">
+      <Project>{b038c58a-bafe-4e59-91d3-563ef7d71992}</Project>
+      <Name>SignalR.Compression.Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

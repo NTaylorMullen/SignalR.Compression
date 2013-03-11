@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Compression.AspNet.
 		{F74C4622-3244-4BB5-BFE7-2AA14F492096} = {F74C4622-3244-4BB5-BFE7-2AA14F492096}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Compression.Server.SystemWeb", "SignalR.Compression.Server.SystemWeb\SignalR.Compression.Server.SystemWeb.csproj", "{B874AB95-D7DD-404B-AC0D-9CF150DD4A3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{ADC4977F-1594-41D9-A014-8B1F793A60E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADC4977F-1594-41D9-A014-8B1F793A60E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADC4977F-1594-41D9-A014-8B1F793A60E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B874AB95-D7DD-404B-AC0D-9CF150DD4A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B874AB95-D7DD-404B-AC0D-9CF150DD4A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B874AB95-D7DD-404B-AC0D-9CF150DD4A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B874AB95-D7DD-404B-AC0D-9CF150DD4A3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

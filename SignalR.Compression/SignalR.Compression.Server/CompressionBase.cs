@@ -11,7 +11,7 @@ namespace SignalR.Compression.Server
 {
     public class CompressionBase
     {
-        public void CompressPayloads(RouteCollection routes)
+        internal void CompressPayloads()
         {
             var resolver = GlobalHost.DependencyResolver;
 
@@ -28,9 +28,7 @@ namespace SignalR.Compression.Server
             resolver.Register(typeof(IContractsGenerator), () => contractGenerator.Value);
 
             var parameterBinder = new Lazy<CompressableParameterResolver>(() => new CompressableParameterResolver(payloadDescriptorProvider.Value, payloadDecompressor.Value));
-            resolver.Register(typeof(IParameterResolver), () => parameterBinder.Value);
-
-            routes.MapConnection<ContractEndpoint>("contracts", "contracts");
+            resolver.Register(typeof(IParameterResolver), () => parameterBinder.Value);            
 
             resolver.Resolve<IHubPipeline>().AddModule(new PayloadCompressionModule(resolver.Resolve<IPayloadCompressor>(), resolver.Resolve<IPayloadDescriptorProvider>(), resolver.Resolve<IContractsGenerator>()));
         }
