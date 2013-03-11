@@ -9,6 +9,7 @@
         compression = signalR.compression,
         compressor = compression.compressor,
         utilities = compression._.utilities,
+        events = compression.events,
         hubConnection = $.hubConnection,
         savedCreateHubProxy = hubConnection.prototype.createHubProxy;
 
@@ -16,7 +17,7 @@
         var proxy = savedCreateHubProxy.apply(this, arguments),
             savedInvoke = proxy.invoke,
             connection = this,
-            compressionData = connection._.compressionData;
+            compressionData = connection.compression._;
 
         proxy.invoke = function (methodName) {
             var contracts = compressionData.contracts,
@@ -66,6 +67,10 @@
                     }
                 }
             }
+
+            connection.log("SignalR Compression: Invoking method '" + methodName + "' with args: " + methodArgs[1] + ".");
+            $(connection.compression).triggerHandler(events.onInvokingServerMethod, [methodName, methodArgs[1]]);
+
             return savedInvoke.apply(this, methodArgs);
         };
 

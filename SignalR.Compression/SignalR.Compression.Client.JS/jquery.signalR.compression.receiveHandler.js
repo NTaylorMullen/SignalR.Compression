@@ -9,13 +9,14 @@
         compression = signalR.compression,
         decompressor = compression.decompressor,
         utilities = compression._.utilities,
+        events = compression.events,
         savedReceived = signalR.prototype.received;
 
     signalR.prototype.received = function (fn) {
         var layer = function (minData) {
             var callbackId,
             connection = this,
-            compressionData = connection._.compressionData,
+            compressionData = connection.compression._,
             contracts = compressionData.contracts,
             data,
             contract,
@@ -25,6 +26,9 @@
             if (contracts) {
                 // Verify this is a return value
                 if (typeof (minData.I) !== "undefined" && minData.R) {
+                    connection.log("SignalR Compression: Server has returned data: " + minData.R + ".");
+                    $(connection.compression).triggerHandler(events.onMethodResponse, [minData.R]);
+
                     data = compressionData.decompressResult.shift();
                     callbackId = minData.I;
 
@@ -48,7 +52,10 @@
                         minData.R = result;
                     }
                 }
-                else if (typeof (minData.A) !== "undefined" && typeof (minData.C) !== "undefined") {
+                else if (typeof (minData.A) !== "undefined" && typeof (minData.C) !== "undefined") { // If it's not a return then it's an invocation
+                    connection.log("SignalR Compression: Server invoking method '" + minData.M + "' with arguments: " + minData.A[0] + ".");
+                    $(connection.compression).triggerHandler(events.onServerInvokingClient, [minData.M, minData.A[0]]);
+
                     $.each(minData.A, function (i, arg) {
                         var contractId = minData.C[i],
                             contract,
