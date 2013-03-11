@@ -7,14 +7,60 @@
     "use strict";
 
     var signalR = $.signalR,
+        hubConnection = $.hubConnection,
+        events = {
+            onMethodResponse: "OnMethodResponse", // Triggers when a server returns a value from the server (passes compressed data)
+            onInvokingServerMethod: "OnInvokingServerMethod", // Triggers when the client invokes a method on the server (passes compressed arguments)
+            onServerInvokingClient: "OnServerInvokingClient" // Triggers when the server invokes a method on the client (passes compressed arguments)
+        },
         compression = {
             _: {
                 utilities: null // Created by jquery.signalR.compression.utilities
             },
             settings: null,
             compressor: null, // Created by jquery.signalR.compression.compressor
-            decompressor: null // Created by jquery.signalR.compression.decompressor
+            decompressor: null, // Created by jquery.signalR.compression.decompressor
+            events: events
         };
+
+    $.extend(hubConnection.fn, {
+        compression: {
+            _: {
+                decompressResult: [], // Array of Booleans representing if we should decompress an invocation result,
+                contracts: {} // Contracts to abide by when sending/receiving data
+            },
+            methodResponse: function (callback) {
+                /// <summary>Adds a callback that will be invoked when the server returns a value from the server (passes compressed data).</summary>
+                /// <param name="callback" type="Function">A callback to execute when a server method returns a value</param>
+                /// <returns type="signalR" />
+                var connection = this;
+                $(connection).bind(events.onMethodResponse, function (e, result) {
+                    callback.call(connection, result);
+                });
+                return connection;
+            },
+            invokingServerMethod: function (callback) {
+                /// <summary>Adds a callback that will be invoked when the client invokes a method on the server (passes compressed arguments).</summary>
+                /// <param name="callback" type="Function">A callback to execute when the client invokes a server method</param>
+                /// <returns type="signalR" />
+                var connection = this;
+                $(connection).bind(events.onInvokingServerMethod, function (e, methodName, args) {
+                    callback.call(connection, methodName, args);
+                });
+                return connection;
+            },
+            serverInvokingClient: function (callback) {
+                /// <summary>Adds a callback that will be invoked when the server invokes a method on the client (passes compressed arguments).</summary>
+                /// <param name="callback" type="Function">A callback to execute when the server invokes a client method</param>
+                /// <returns type="signalR" />
+                var connection = this;
+                $(connection).bind(events.onServerInvokingClient, function (e, methodName, args) {
+                    callback.call(connection, methodName, args);
+                });
+                return connection;
+            }
+        }
+    });
 
     signalR.compression = compression;
 
@@ -166,24 +212,64 @@
     "use strict";
 
     var signalR = $.signalR,
-        savedConnection = signalR.fn.init;
+        savedStart = signalR.prototype.start,
+        events = signalR.events;
 
-    $.signalR.fn.init = function () {
-        var connection = this,
-            compressionData = {
-                decompressResult: [], // Array of Booleans representing if we should decompress an invocation result,
-                contracts: {} // Contracts to abide by when sending/receiving data
-            };
+    signalR.prototype.start = function (options, callback) {
+        var dataType = "json",
+            deferred = $.Deferred(),
+            connection = this,
+            jsonp = false,
+            url = connection.url,
+            startArgs = arguments;
 
-        savedConnection.apply(connection, arguments),
+        if (connection.compression) {
+            if ($.type(options) === "object") {
+                if (options.jsonp === true) {
+                    jsonp = true;
+                }
+                else if (signalR.fn.isCrossDomain(connection.url)) {
+                    jsonp = !$.support.cors;
+                }
+            }
 
-        connection._.compressionData = compressionData;
+            if (jsonp) {
+                dataType = "jsonp";
+            }
 
-        connection.starting(function (result) {
-            compressionData.contracts = result.Contracts;
-        });
+            //
+            if (url.toLowerCase().indexOf("/signalr", url.length - 8) !== -1) {
+                url = url.substr(0, url.length - 8);
+            }
 
-        return connection;
+            url += "/compression/contracts";
+
+            $.ajax({
+                url: url,
+                global: false,
+                cache: false,
+                type: "GET",
+                data: {},
+                dataType: dataType,
+                error: function (error) {
+                    $(connection).triggerHandler(events.onError, [error.responseText]);
+                    deferred.reject("SignalR: Error during contract retrieval request: " + error.responseText);
+                },
+                success: function (result) {
+                    connection.compression._.contracts = result.Contracts;
+
+                    savedStart.apply(connection, startArgs).done(function () {
+                        deferred.resolve(connection);
+                    }).fail(function () {
+                        deferred.reject.apply(this, arguments);
+                    });
+                }
+            });
+
+            return deferred.promise();
+        }
+        
+        return savedStart.apply(connection, startArgs);
     };
 
 }(window.jQuery, window));
@@ -199,6 +285,7 @@
         compression = signalR.compression,
         compressor = compression.compressor,
         utilities = compression._.utilities,
+        events = compression.events,
         hubConnection = $.hubConnection,
         savedCreateHubProxy = hubConnection.prototype.createHubProxy;
 
@@ -206,7 +293,7 @@
         var proxy = savedCreateHubProxy.apply(this, arguments),
             savedInvoke = proxy.invoke,
             connection = this,
-            compressionData = connection._.compressionData;
+            compressionData = connection.compression._;
 
         proxy.invoke = function (methodName) {
             var contracts = compressionData.contracts,
@@ -256,6 +343,10 @@
                     }
                 }
             }
+
+            connection.log("SignalR Compression: Invoking method '" + methodName + "' with args: " + methodArgs[1] + ".");
+            $(connection.compression).triggerHandler(events.onInvokingServerMethod, [methodName, methodArgs[1]]);
+
             return savedInvoke.apply(this, methodArgs);
         };
 
@@ -275,13 +366,14 @@
         compression = signalR.compression,
         decompressor = compression.decompressor,
         utilities = compression._.utilities,
+        events = compression.events,
         savedReceived = signalR.prototype.received;
 
     signalR.prototype.received = function (fn) {
         var layer = function (minData) {
             var callbackId,
             connection = this,
-            compressionData = connection._.compressionData,
+            compressionData = connection.compression._,
             contracts = compressionData.contracts,
             data,
             contract,
@@ -291,6 +383,9 @@
             if (contracts) {
                 // Verify this is a return value
                 if (typeof (minData.I) !== "undefined" && minData.R) {
+                    connection.log("SignalR Compression: Server has returned data: " + minData.R + ".");
+                    $(connection.compression).triggerHandler(events.onMethodResponse, [minData.R]);
+
                     data = compressionData.decompressResult.shift();
                     callbackId = minData.I;
 
@@ -314,7 +409,10 @@
                         minData.R = result;
                     }
                 }
-                else if (typeof (minData.A) !== "undefined" && typeof (minData.C) !== "undefined") {
+                else if (typeof (minData.A) !== "undefined" && typeof (minData.C) !== "undefined") { // If it's not a return then it's an invocation
+                    connection.log("SignalR Compression: Server invoking method '" + minData.M + "' with arguments: " + minData.A + ".");
+                    $(connection.compression).triggerHandler(events.onServerInvokingClient, [minData.M, minData.A[0]]);
+
                     $.each(minData.A, function (i, arg) {
                         var contractId = minData.C[i],
                             contract,
