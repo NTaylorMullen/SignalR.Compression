@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
 using Microsoft.AspNet.SignalR;
 using SignalR.Compression.Server;
+using SignalR.Compression.Server.SystemWeb;
 
 namespace SignalR.Compression.AspNet.Samples
 {
