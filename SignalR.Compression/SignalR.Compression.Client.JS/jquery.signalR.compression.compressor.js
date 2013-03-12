@@ -22,7 +22,7 @@
                             enumerable = val[1][1];
 
                         // Check the payload type of the parameter, if it's a payload we need to recursively compress it
-                        if (utilities.isPayload(compressedTypeId, contracts)) {
+                        if (uncompressed[i] && utilities.isPayload(compressedTypeId, contracts)) {
                             if (enumerable) {
                                 enumerated = [];
 

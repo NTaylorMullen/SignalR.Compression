@@ -125,7 +125,7 @@
                             enumerable = val[1][1];
 
                         // Check the payload type of the parameter, if it's a payload we need to recursively compress it
-                        if (utilities.isPayload(compressedTypeId, contracts)) {
+                        if (uncompressed[i] && utilities.isPayload(compressedTypeId, contracts)) {
                             if (enumerable) {
                                 enumerated = [];
 
@@ -177,7 +177,7 @@
                             enumerated;
 
                         // Check the payload type of the parameter, if it's a payload we need to recursively decompress it
-                        if (utilities.isPayload(compressedTypeId, contracts)) {
+                        if (compressed[i] && utilities.isPayload(compressedTypeId, contracts)) {
                             if (enumerable) {
                                 enumerated = [];
 
@@ -410,7 +410,7 @@
                     }
                 }
                 else if (typeof (minData.A) !== "undefined" && typeof (minData.C) !== "undefined") { // If it's not a return then it's an invocation
-                    connection.log("SignalR Compression: Server invoking method '" + minData.M + "' with arguments: " + minData.A + ".");
+                    connection.log("SignalR Compression: Server invoking method '" + minData.M + "' with arguments: " + minData.A[0] + ".");
                     $(connection.compression).triggerHandler(events.onServerInvokingClient, [minData.M, minData.A[0]]);
 
                     $.each(minData.A, function (i, arg) {
