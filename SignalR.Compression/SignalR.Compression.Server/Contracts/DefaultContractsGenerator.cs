@@ -39,7 +39,7 @@ namespace SignalR.Compression.Server
                                 .Select(hub => methodProvider.GetMethods(hub)
                                 .Where(methodDescriptor => payloadProvider.HasPayload(methodDescriptor.ReturnType)))
                                 .Where(methodList => methodList.Count() > 0)
-                                .ToDictionary(methodList => methodList.First().Hub.Name,
+                                .ToDictionary(methodList => methodList.First().Hub.HubType.GetHubName(),
                                                 methodList => methodList
                                                 .Select(methodDescriptor =>
                                                     {
@@ -71,7 +71,7 @@ namespace SignalR.Compression.Server
                                 .Select(hub => methodProvider.GetMethods(hub)
                                 .Where(methodDescriptor => HasPayloadArgument(methodDescriptor.Parameters, payloadProvider)))
                                 .Where(methodList => methodList.Count() > 0)
-                                .ToDictionary(methodList => methodList.First().Hub.Name,
+                                .ToDictionary(methodList => methodList.First().Hub.HubType.GetHubName(),
                                                 methodList => methodList
                                                 .Select(methodDescriptor =>
                                                     new object[]{

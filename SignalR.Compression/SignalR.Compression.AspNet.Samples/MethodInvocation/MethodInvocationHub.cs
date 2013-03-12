@@ -4,7 +4,6 @@ using SignalR.Compression.AspNet.Samples.Payloads;
 
 namespace SignalR.Compression.AspNet.Samples.MethodInvocation
 {
-    [HubName("methodInvocationHub")]
     public class MethodInvocationHub : Hub
     {
         public Person EchoPerson(Person person)
