@@ -22,11 +22,11 @@
     };    
 
     $.connection.hub.compression.serverInvokingClient(function (methodName, args) {
-        $("#echoCompressed").html("Invoking <strong>" + methodName + "</strong> on client with:<br />" + toBox(args))
+        $("#echoCompressed").html("Invoking <strong>" + methodName + "</strong> on client with:<br />" + toBox(args));
     });
 
     $.connection.hub.compression.invokingServerMethod(function (methodName, args) {
-        $("#invokingCompressed").html("Invoking <strong>" + methodName + "</strong> on server with:<br />" + toBox(args))
+        $("#invokingCompressed").html("Invoking <strong>" + methodName + "</strong> on server with:<br />" + toBox(args));
     });
 
     $.connection.hub.logging = true;

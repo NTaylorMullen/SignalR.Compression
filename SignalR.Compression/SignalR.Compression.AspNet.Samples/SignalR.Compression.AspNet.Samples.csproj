@@ -93,6 +93,8 @@
     <Content Include="Global.asax" />
     <Content Include="MethodInvocation\Default.aspx" />
     <Content Include="MethodInvocation\MethodInvocation.js" />
+    <Content Include="MethodReturner\Default.aspx" />
+    <Content Include="MethodReturner\MethodReturner.js" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -123,8 +125,18 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="MethodInvocation\MethodInvocationHub.cs" />
+    <Compile Include="MethodReturner\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MethodReturner\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MethodReturner\MethodReturnerHub.cs" />
+    <Compile Include="Payloads\Parent.cs" />
     <Compile Include="Payloads\Person.cs" />
     <Compile Include="Payloads\Student.cs" />
+    <Compile Include="Payloads\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalR.Compression.AspNet.Samples.Master.cs">
       <DependentUpon>SignalR.Compression.AspNet.Samples.Master</DependentUpon>
@@ -154,9 +166,7 @@
       <Name>SignalR.Compression.Server</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MethodReturner\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
