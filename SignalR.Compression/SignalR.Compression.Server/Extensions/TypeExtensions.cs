@@ -8,10 +8,10 @@ namespace SignalR.Compression.Server
     {
         public static bool IsEnumerable(this Type type)
         {
-            return type.GetInterfaces()
-                        .Where(t => t.IsGenericType)
-                        .Where(t => t.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-                        .Count() > 0;
+            return type != typeof(String) &&
+                        (type.GetInterfaces()
+                        .Where(t => t.IsGenericType &&  t.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                        .Count() > 0);
         }
 
         public static Type GetEnumerableType(this Type type)
