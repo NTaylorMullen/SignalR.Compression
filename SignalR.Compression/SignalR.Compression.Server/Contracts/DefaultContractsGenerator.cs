@@ -121,7 +121,7 @@ namespace SignalR.Compression.Server
                                                                         .Select(dataDescriptor =>
                                                                         {
                                                                             PayloadDescriptor datasPayloadDescriptor = payloadProvider.GetPayload(dataDescriptor.Type);
-                                                                            long payloadId = -1;
+                                                                            long payloadId = 0;
 
                                                                             // If payloadDescriptor is null then the parameter type may have a payload within it
                                                                             if (datasPayloadDescriptor == null)
