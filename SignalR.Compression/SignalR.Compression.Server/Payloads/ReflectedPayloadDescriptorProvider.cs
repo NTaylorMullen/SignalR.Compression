@@ -41,35 +41,49 @@ namespace SignalR.Compression.Server
                         DigitsToMaintain = ((PayloadAttribute)Attribute.GetCustomAttribute(type, typeof(PayloadAttribute))).DigitsToMaintain
                     },
                     Data = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                               .Select(propertyInfo => new DataDescriptor
+                               .Select(propertyInfo =>
                                 {
-                                    Name = propertyInfo.Name,
-                                    Type = propertyInfo.PropertyType,
-                                    Enumerable = propertyInfo.PropertyType.IsEnumerable(),
-                                    SetValue = (baseObject, newValue) =>
-                                    {
-                                        propertyInfo.SetValue(baseObject, newValue, null);
-                                    },
-                                    GetValue = (baseObject) =>
-                                    {
-                                        return propertyInfo.GetValue(baseObject, null);
-                                    }
+                                    var descriptor = new DataDescriptor
+                                        {
+                                            Name = propertyInfo.Name,
+                                            Type = propertyInfo.PropertyType,
+                                            Enumerable = propertyInfo.PropertyType.IsEnumerable(),
+                                            SetValue = (baseObject, newValue) =>
+                                            {
+                                                propertyInfo.SetValue(baseObject, newValue, null);
+                                            },
+                                            GetValue = (baseObject) =>
+                                            {
+                                                return propertyInfo.GetValue(baseObject, null);
+                                            }
+                                        };
+
+                                    descriptor.CompressionTypeId = CompressionTypeHelper.GetCompressionType(descriptor);
+
+                                    return descriptor;
                                 })
                                .Union(type.GetFields(BindingFlags.Public | BindingFlags.Instance)
-                               .Select(fieldInfo => new DataDescriptor
-                               {
-                                   Name = fieldInfo.Name,
-                                   Type = fieldInfo.FieldType,
-                                   Enumerable = fieldInfo.FieldType.IsEnumerable(),
-                                   SetValue = (baseObject, newValue) =>
-                                   {
-                                       fieldInfo.SetValue(baseObject, newValue);
-                                   },
-                                   GetValue = (baseObject) =>
-                                   {
-                                       return fieldInfo.GetValue(baseObject);
-                                   }
-                               }))
+                               .Select(fieldInfo =>
+                                {
+                                    var descriptor = new DataDescriptor
+                                        {
+                                            Name = fieldInfo.Name,
+                                            Type = fieldInfo.FieldType,
+                                            Enumerable = fieldInfo.FieldType.IsEnumerable(),
+                                            SetValue = (baseObject, newValue) =>
+                                            {
+                                                fieldInfo.SetValue(baseObject, newValue);
+                                            },
+                                            GetValue = (baseObject) =>
+                                            {
+                                                return fieldInfo.GetValue(baseObject);
+                                            }
+                                        };
+
+                                    descriptor.CompressionTypeId = CompressionTypeHelper.GetCompressionType(descriptor);
+
+                                    return descriptor;
+                                }))
                                .OrderBy(dataDescriptor => dataDescriptor.Name)
                 })
                 .ToDictionary(payload => payload.Type,

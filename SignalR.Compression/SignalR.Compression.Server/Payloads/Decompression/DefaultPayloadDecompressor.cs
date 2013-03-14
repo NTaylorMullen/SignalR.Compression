@@ -19,6 +19,19 @@ namespace SignalR.Compression.Server
             _provider = provider;
         }
 
+        private object CheckNull(object payload, DataDescriptor descriptor)
+        {
+            if (descriptor.CompressionTypeId != CompressionTypeHelper.NumericTypeId && payload != null)
+            {
+                long value;
+                if (long.TryParse(payload.ToString(), out value) && value == 0)
+                {
+                    return null;
+                }
+            }
+            return payload;
+        }
+
         public object Decompress(object payload, PayloadDescriptor payloadDescriptor)
         {
             var compressedPayload = payload as object[];
@@ -29,6 +42,9 @@ namespace SignalR.Compression.Server
             foreach (var data in payloadDescriptor.Data)
             {
                 var value = compressedPayload[i++];
+
+                // Convert value to null if it was minified as a 0
+                value = CheckNull(value, data);
 
                 if (value != null)
                 {

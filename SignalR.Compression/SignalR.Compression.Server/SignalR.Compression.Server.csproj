@@ -32,12 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.1.0.1\lib\net40\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -53,6 +51,7 @@
     <Compile Include="CompressionBase.cs" />
     <Compile Include="Contracts\DefaultContractsGenerator.cs" />
     <Compile Include="Contracts\IContractsGenerator.cs" />
+    <Compile Include="Core\Compression\CompressionTypeHelper.cs" />
     <Compile Include="Core\ContractedClientHubInvocation.cs" />
     <Compile Include="Core\DataDescriptor.cs" />
     <Compile Include="Core\PayloadAttribute.cs" />

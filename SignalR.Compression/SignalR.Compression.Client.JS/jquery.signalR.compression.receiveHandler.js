@@ -36,7 +36,7 @@
                     if (data.decompress) {
                         // Pull the contract for the given method
                         contract = utilities.getContractFromResponse(data.hubName, data.methodName, contracts);
-                        enumerable = contract[1];
+                        enumerable = utilities.isEnumerable(contract[1]);
                         contract = contract[0];
 
                         if (enumerable === false) {

@@ -20,6 +20,38 @@ namespace SignalR.Compression.Server
             _provider = provider;
         }
 
+        private object ApplyCompressionSettings(object payload, CompressionSettings settings)
+        {
+            var payloadType = payload.GetType();
+
+            if (settings.DigitsToMaintain >= 0 && payloadType.CanBeRounded())
+            {
+                if (payloadType != typeof(double))
+                {
+                    payload = Math.Round((decimal)payload, settings.DigitsToMaintain);
+                }
+                else
+                {
+                    payload = Math.Round((double)payload, settings.DigitsToMaintain);
+                }
+            }
+
+            return payload;
+        }
+
+        private object CheckNull(object payload, DataDescriptor descriptor)
+        {
+            if (payload == null)
+            {
+                if (descriptor.CompressionTypeId != CompressionTypeHelper.NumericTypeId)
+                {
+                    return 0;
+                }
+            }
+
+            return payload;
+        }
+
         public object Compress(object payload, CompressionSettings settings)
         {
             if (payload != null)
@@ -33,7 +65,7 @@ namespace SignalR.Compression.Server
                     return payloadDescriptor.Data.Select(dataDescriptor =>
                             {
                                 // Recursively compress the object value until it's at a base type
-                                return Compress(dataDescriptor.GetValue(payload), settings);
+                                return Compress(CheckNull(dataDescriptor.GetValue(payload), dataDescriptor), settings);
                             });
                 }
                 else
@@ -59,19 +91,7 @@ namespace SignalR.Compression.Server
                     }
                 }
 
-                payloadType = payload.GetType();
-
-                if (settings.DigitsToMaintain >= 0 && payloadType.CanBeRounded())
-                {
-                    if (payloadType != typeof(double))
-                    {
-                        payload = Math.Round((decimal)payload, settings.DigitsToMaintain);
-                    }
-                    else
-                    {
-                        payload = Math.Round((double)payload, settings.DigitsToMaintain);
-                    }
-                }
+                payload = ApplyCompressionSettings(payload, settings);
             }
 
             return payload;

@@ -10,6 +10,8 @@ namespace SignalR.Compression.Server
 
         public Type Type { get; set; }
 
+        public int CompressionTypeId { get; set; }
+
         /// <summary>
         /// Sets the value taking in the baseObject and the newValue as the two object parameters
         /// </summary>

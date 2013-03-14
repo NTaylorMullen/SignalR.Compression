@@ -58,7 +58,7 @@ namespace SignalR.Compression.Server
 
                                                             new object[]{
                                                                 payloadDescriptor.ID,
-                                                                enumerable
+                                                                enumerable ? CompressionTypeHelper.EnumerableTypeId : CompressionTypeHelper.DefaultTypeId
                                                             }
                                                         };
                                                     }).ToDictionary(methodNameToID => methodNameToID[0],
@@ -105,7 +105,7 @@ namespace SignalR.Compression.Server
 
                                                                                             return new object[]{
                                                                                                 payloadId,
-                                                                                                enumerable
+                                                                                                enumerable ? CompressionTypeHelper.EnumerableTypeId : CompressionTypeHelper.DefaultTypeId
                                                                                             };
                                                                                         })
                                                                 }).ToDictionary(methodNameToID => methodNameToID[0],
@@ -121,16 +121,14 @@ namespace SignalR.Compression.Server
                                                                         .Select(dataDescriptor =>
                                                                         {
                                                                             PayloadDescriptor datasPayloadDescriptor = payloadProvider.GetPayload(dataDescriptor.Type);
-                                                                            bool enumerable = false;
                                                                             long payloadId = -1;
 
                                                                             // If payloadDescriptor is null then the parameter type may have a payload within it
                                                                             if (datasPayloadDescriptor == null)
                                                                             {
                                                                                 // See if parameter is enumerable
-                                                                                if (dataDescriptor.Type.IsEnumerable())
+                                                                                if (dataDescriptor.Enumerable)
                                                                                 {
-                                                                                    enumerable = true;
                                                                                     datasPayloadDescriptor = payloadProvider.GetPayload(dataDescriptor.Type.GetEnumerableType());
 
                                                                                     if (datasPayloadDescriptor != null)
@@ -148,7 +146,7 @@ namespace SignalR.Compression.Server
                                                                                 dataDescriptor.Name,
                                                                                 new object[]{
                                                                                     payloadId,
-                                                                                    enumerable
+                                                                                    CompressionTypeHelper.GetCompressionType(dataDescriptor)
                                                                                 }
                                                                             };
                                                                         }));

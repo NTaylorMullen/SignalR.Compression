@@ -6,7 +6,12 @@
 
     var signalR = $.signalR,
         compression = signalR.compression,
-        utilities;
+        utilities,
+        compressionTypeIds = {
+            defaultTypeId: 0,
+            enumerableTypeId: 1,
+            numericTypeId: 2
+        };
 
     utilities = {
         getContractFromResponse: function (hubName, methodName, contracts) {
@@ -26,6 +31,15 @@
         },
         isPayload: function (contractId, contracts) {
             return !!utilities.getContract(contractId, contracts);
+        },
+        isDefault: function (compressionTypeId) {
+            return compressionTypeIds.defaultTypeId === compressionTypeId;
+        },
+        isEnumerable: function (compressionTypeId) {
+            return compressionTypeIds.enumerableTypeId === compressionTypeId;
+        },
+        isNumeric: function (compressionTypeId) {
+            return compressionTypeIds.numericTypeId === compressionTypeId;
         }
     };
     

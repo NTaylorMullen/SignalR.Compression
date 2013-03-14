@@ -74,7 +74,12 @@
 
     var signalR = $.signalR,
         compression = signalR.compression,
-        utilities;
+        utilities,
+        compressionTypeIds = {
+            defaultTypeId: 0,
+            enumerableTypeId: 1,
+            numericTypeId: 2
+        };
 
     utilities = {
         getContractFromResponse: function (hubName, methodName, contracts) {
@@ -94,6 +99,15 @@
         },
         isPayload: function (contractId, contracts) {
             return !!utilities.getContract(contractId, contracts);
+        },
+        isDefault: function (compressionTypeId) {
+            return compressionTypeIds.defaultTypeId === compressionTypeId;
+        },
+        isEnumerable: function (compressionTypeId) {
+            return compressionTypeIds.enumerableTypeId === compressionTypeId;
+        },
+        isNumeric: function (compressionTypeId) {
+            return compressionTypeIds.numericTypeId === compressionTypeId;
         }
     };
     
@@ -121,26 +135,35 @@
 
                     $.each(contract, function (i, val) {
                         var propertyName = val[0],
-                            compressedTypeId = val[1][0],
-                            enumerable = val[1][1];
+                            payloadId = val[1][0],
+                            compressionTypeId = val[1][1],
+                            enumerable = utilities.isEnumerable(compressionTypeId),
+                            convertToZero = !utilities.isNumeric(compressionTypeId);
 
                         // Check the payload type of the parameter, if it's a payload we need to recursively compress it
-                        if (uncompressed[i] && utilities.isPayload(compressedTypeId, contracts)) {
+                        if (uncompressed[i] && utilities.isPayload(payloadId, contracts)) {
                             if (enumerable) {
                                 enumerated = [];
 
                                 for (var j = 0; j < uncompressed[propertyName].length; j++) {
-                                    enumerated[j] = that.compress(uncompressed[propertyName][j], utilities.getContract(compressedTypeId, contracts), contracts);
+                                    enumerated[j] = that.compress(uncompressed[propertyName][j], utilities.getContract(payloadId, contracts), contracts);
                                 }
 
                                 result[propertyName].push(enumerated);
                             }
                             else {
-                                result.push(that.compress(uncompressed[propertyName], utilities.getContract(compressedTypeId, contracts), contracts));
+                                result.push(that.compress(uncompressed[propertyName], utilities.getContract(payloadId, contracts), contracts));
                             }
                         }
                         else {
-                            result.push(uncompressed[propertyName] || null);
+                            if ((uncompressed[propertyName] === null ||  typeof uncompressed[propertyName] === 'undefined') && convertToZero) {
+                                uncompressed[propertyName] = 0;
+                            }
+                            else if (uncompressed[propertyName] === 'undefined') { // If this is true then the value is a numeric set to undefined, need to reset it to null
+                                uncompressed[propertyName] = null;
+                            }
+
+                            result.push(uncompressed[propertyName]);
                         }
                     });
                 }
@@ -172,26 +195,32 @@
 
                     $.each(contract, function (i, val) {
                         var propertyName = val[0],
-                            compressedTypeId = val[1][0],
-                            enumerable = val[1][1],
+                            payloadId = val[1][0],
+                            compressionTypeId = val[1][1],
+                            enumerable = utilities.isEnumerable(compressionTypeId),
+                            convertToNull = !utilities.isNumeric(compressionTypeId),
                             enumerated;
 
                         // Check the payload type of the parameter, if it's a payload we need to recursively decompress it
-                        if (compressed[i] && utilities.isPayload(compressedTypeId, contracts)) {
+                        if (compressed[i] && utilities.isPayload(payloadId, contracts)) {
                             if (enumerable) {
                                 enumerated = [];
 
                                 for (var j = 0; j < compressed[i].length; j++) {
-                                    enumerated[j] = that.decompress(compressed[i][j], utilities.getContract(compressedTypeId, contracts), contracts);
+                                    enumerated[j] = that.decompress(compressed[i][j], utilities.getContract(payloadId, contracts), contracts);
                                 }
 
                                 result[propertyName] = enumerated;
                             }
                             else {
-                                result[propertyName] = that.decompress(compressed[i], utilities.getContract(compressedTypeId, contracts), contracts);
+                                result[propertyName] = that.decompress(compressed[i], utilities.getContract(payloadId, contracts), contracts);
                             }
                         }
                         else {
+                            if (compressed[i] === 0 && convertToNull) {
+                                compressed[i] = null;
+                            }
+
                             result[propertyName] = compressed[i];
                         }
                     });
@@ -393,7 +422,7 @@
                     if (data.decompress) {
                         // Pull the contract for the given method
                         contract = utilities.getContractFromResponse(data.hubName, data.methodName, contracts);
-                        enumerable = contract[1];
+                        enumerable = utilities.isEnumerable(contract[1]);
                         contract = contract[0];
 
                         if (enumerable === false) {
