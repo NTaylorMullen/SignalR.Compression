@@ -123,7 +123,6 @@ namespace SignalR.Compression.Server
             }
         }
 
-
         public PayloadDescriptor GetPayload(Type type)
         {
             if (IsPayload(type))
@@ -134,7 +133,6 @@ namespace SignalR.Compression.Server
             return null;
         }
 
-
         public bool IsPayload(Type type)
         {
             return _payloads.Value.Keys.Contains(type);
@@ -142,20 +140,12 @@ namespace SignalR.Compression.Server
 
         public bool HasPayload(Type type)
         {
-            if (IsPayload(type))
-            {
-                return true;
-            }
-
             if (type.IsEnumerable())
             {
-                return _payloads.Value.Keys.Contains(type.GetEnumerableType());
+                type = type.GetEnumerableType();
             }
 
-            // TODO: If we're not a payload or a collection at this point we should cycle 
-            // through the members of the type and determine if any are payloads
-
-            return false;
+            return IsPayload(type);
         }
     }
 }

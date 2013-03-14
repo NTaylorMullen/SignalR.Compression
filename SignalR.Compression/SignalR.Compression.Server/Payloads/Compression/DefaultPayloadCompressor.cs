@@ -63,21 +63,23 @@ namespace SignalR.Compression.Server
                 if (payloadDescriptor != null)
                 {
                     return payloadDescriptor.Data.Select(dataDescriptor =>
-                            {
-                                // Recursively compress the object value until it's at a base type
-                                return Compress(CheckNull(dataDescriptor.GetValue(payload), dataDescriptor), settings);
-                            });
+                    {
+                        // Recursively compress the object value until it's at a base type
+                        return Compress(CheckNull(dataDescriptor.GetValue(payload), dataDescriptor), settings);
+                    });
                 }
                 else
                 {
                     // At this point the payload object isn't directly a payload but may contain a payload
                     if (_provider.HasPayload(payloadType))
-                    {
-                        payloadType = payloadType.GetEnumerableType();
-                        var itemType = payload.GetType();
-                        payloadDescriptor = _provider.GetPayload(payloadType);
+                    {                        
+                        // We also do this part separately and special case enumerable payloads because it's more performant then
+                        // trying to compress every item of an array no matter if its a payload or not.
                         var payloadList = payload as ICollection;
                         var compressedList = new List<object>();
+
+                        payloadType = payloadType.GetEnumerableType();
+                        payloadDescriptor = _provider.GetPayload(payloadType);
 
                         if (payloadDescriptor != null)
                         {
