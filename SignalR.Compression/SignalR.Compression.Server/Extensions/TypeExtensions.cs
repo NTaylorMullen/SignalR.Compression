@@ -10,7 +10,7 @@ namespace SignalR.Compression.Server
         {
             return type != typeof(String) &&
                         (type.GetInterfaces()
-                        .Where(t => t.IsGenericType &&  t.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                        .Where(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                         .Count() > 0);
         }
 

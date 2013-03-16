@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hosting;
@@ -19,7 +17,7 @@ namespace SignalR.Compression.Server
 
             base.Initialize(resolver, context);
         }
-        
+
         private Task ProcessJsonpRequest(HostContext context, object payload)
         {
             context.Response.ContentType = JsonUtility.JavaScriptMimeType;
@@ -29,7 +27,7 @@ namespace SignalR.Compression.Server
         }
 
         public override Task ProcessRequest(HostContext context)
-        {            
+        {
             var response = new Dictionary<string, object>();
 
             response["Contracts"] = _contractGenerator != null ? _contractGenerator.GenerateContracts() : null;

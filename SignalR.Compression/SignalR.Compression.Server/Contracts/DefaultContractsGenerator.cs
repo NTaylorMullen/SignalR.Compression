@@ -162,7 +162,7 @@ namespace SignalR.Compression.Server
 
             return new object[] { methodReturnContracts, methodInvokerContracts, payloadContracts };
         }
-        
+
         public object GenerateContracts()
         {
             return _generatedContracts.Value;

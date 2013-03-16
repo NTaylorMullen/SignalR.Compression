@@ -2,16 +2,11 @@
 // Taken from SignalR source to expose its use outside of the assembly (maintain consistency for this addon).
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Infrastructure;
 
 namespace Microsoft.AspNet.SignalR
 {

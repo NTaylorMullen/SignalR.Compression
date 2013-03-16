@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
-using System.Web.Routing;
 
 namespace SignalR.Compression.Server
 {
@@ -31,7 +26,7 @@ namespace SignalR.Compression.Server
             resolver.Register(typeof(IContractsGenerator), () => contractGenerator.Value);
 
             var parameterBinder = new Lazy<CompressableParameterResolver>(() => new CompressableParameterResolver(payloadDescriptorProvider.Value, payloadDecompressor.Value));
-            resolver.Register(typeof(IParameterResolver), () => parameterBinder.Value);            
+            resolver.Register(typeof(IParameterResolver), () => parameterBinder.Value);
 
             resolver.Resolve<IHubPipeline>().AddModule(new PayloadCompressionModule(resolver.Resolve<IPayloadCompressor>(), resolver.Resolve<IPayloadDescriptorProvider>(), resolver.Resolve<IContractsGenerator>()));
         }

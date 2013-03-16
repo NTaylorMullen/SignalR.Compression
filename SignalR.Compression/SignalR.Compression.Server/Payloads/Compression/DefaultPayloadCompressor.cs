@@ -72,7 +72,7 @@ namespace SignalR.Compression.Server
                 {
                     // At this point the payload object isn't directly a payload but may contain a payload
                     if (_provider.HasPayload(payloadType))
-                    {                        
+                    {
                         // We also do this part separately and special case enumerable payloads because it's more performant then
                         // trying to compress every item of an array no matter if its a payload or not.
                         var payloadList = payload as ICollection;
