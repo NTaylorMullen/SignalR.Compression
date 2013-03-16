@@ -2,7 +2,7 @@
 
 namespace SignalR.Compression.Server
 {
-    public class DataDescriptor
+    internal class DataDescriptor
     {
         public virtual string Name { get; set; }
 

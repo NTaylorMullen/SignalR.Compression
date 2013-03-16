@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SignalR.Compression.Server
 {
-    public class PayloadDescriptor
+    internal class PayloadDescriptor
     {
         public virtual long ID { get; set; }
 

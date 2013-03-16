@@ -8,7 +8,7 @@ using Microsoft.AspNet.SignalR.Hubs;
 
 namespace SignalR.Compression.Server
 {
-    public class ReflectedPayloadDescriptorProvider : IPayloadDescriptorProvider
+    internal class ReflectedPayloadDescriptorProvider : IPayloadDescriptorProvider
     {
         private readonly Lazy<IDictionary<Type, PayloadDescriptor>> _payloads;
         private readonly Lazy<IAssemblyLocator> _locator;

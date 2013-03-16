@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace SignalR.Compression.Server
 {
-    public class ContractedClientHubInvocation : ClientHubInvocation
+    internal class ContractedClientHubInvocation : ClientHubInvocation
     {
         public ContractedClientHubInvocation(ClientHubInvocation invocation)
         {

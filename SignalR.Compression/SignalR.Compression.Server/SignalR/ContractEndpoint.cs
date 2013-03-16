@@ -9,7 +9,7 @@ using Microsoft.AspNet.SignalR.Json;
 
 namespace SignalR.Compression.Server
 {
-    public class ContractEndpoint : PersistentConnection
+    internal class ContractEndpoint : PersistentConnection
     {
         private IContractsGenerator _contractGenerator;
 

@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SignalR.Compression.Server
 {
-    public class DefaultContractsGenerator : IContractsGenerator
+    internal class DefaultContractsGenerator : IContractsGenerator
     {
         private Lazy<JRaw> _generatedContracts;
         private IJsonSerializer _serializer;

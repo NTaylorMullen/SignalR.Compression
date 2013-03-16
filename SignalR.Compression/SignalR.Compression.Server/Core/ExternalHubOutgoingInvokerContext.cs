@@ -5,7 +5,7 @@ using Microsoft.AspNet.SignalR.Hubs;
 
 namespace SignalR.Compression.Server
 {
-    public class ExternalHubOutgoingInvokerContext : IHubOutgoingInvokerContext
+    internal class ExternalHubOutgoingInvokerContext : IHubOutgoingInvokerContext
     {
         public ExternalHubOutgoingInvokerContext(IConnection connection, string signal, ClientHubInvocation invocation, IList<string> excludedSignals)
         {

@@ -6,7 +6,7 @@ using Microsoft.AspNet.SignalR.Json;
 
 namespace SignalR.Compression.Server
 {
-    public class CompressableParameterResolver : IParameterResolver
+    internal class CompressableParameterResolver : IParameterResolver
     {
         private IPayloadDescriptorProvider _provider;
         private IPayloadDecompressor _decompressor;

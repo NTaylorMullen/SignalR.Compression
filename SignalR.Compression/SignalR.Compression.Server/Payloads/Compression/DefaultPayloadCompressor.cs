@@ -6,7 +6,7 @@ using Microsoft.AspNet.SignalR;
 
 namespace SignalR.Compression.Server
 {
-    public class DefaultPayloadCompressor : IPayloadCompressor
+    internal class DefaultPayloadCompressor : IPayloadCompressor
     {
         private IPayloadDescriptorProvider _provider;
 

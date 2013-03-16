@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SignalR.Compression.Server
 {
-    public class DefaultPayloadDecompressor : IPayloadDecompressor
+    internal class DefaultPayloadDecompressor : IPayloadDecompressor
     {
         private IPayloadDescriptorProvider _provider;
 

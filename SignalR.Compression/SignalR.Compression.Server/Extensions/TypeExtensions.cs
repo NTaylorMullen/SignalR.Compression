@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SignalR.Compression.Server
 {
-    public static class TypeExtensions
+    internal static class TypeExtensions
     {
         public static bool IsEnumerable(this Type type)
         {

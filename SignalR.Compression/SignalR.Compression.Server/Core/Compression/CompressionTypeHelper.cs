@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.Compression.Server
 {
-    public static class CompressionTypeHelper
+    internal static class CompressionTypeHelper
     {
         public const int DefaultTypeId = 0;
         public const int EnumerableTypeId = 1;
