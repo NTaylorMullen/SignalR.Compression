@@ -133,10 +133,6 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="MethodReturner\MethodReturnerHub.cs" />
-    <Compile Include="Payloads\Parent.cs" />
-    <Compile Include="Payloads\Person.cs" />
-    <Compile Include="Payloads\Student.cs" />
-    <Compile Include="Payloads\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalR.Compression.AspNet.Samples.Master.cs">
       <DependentUpon>SignalR.Compression.AspNet.Samples.Master</DependentUpon>
@@ -164,6 +160,10 @@
     <ProjectReference Include="..\..\SignalR.Compression.Server\SignalR.Compression.Server.csproj">
       <Project>{b038c58a-bafe-4e59-91d3-563ef7d71992}</Project>
       <Name>SignalR.Compression.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\tests\SignalR.Compression.Tests.Common\SignalR.Compression.Tests.Common.csproj">
+      <Project>{7c4099b2-1c8c-4d0e-8219-6a3efb6e72ab}</Project>
+      <Name>SignalR.Compression.Tests.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
