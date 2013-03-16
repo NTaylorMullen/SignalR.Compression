@@ -157,11 +157,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SignalR.Compression.Server.SystemWeb\SignalR.Compression.Server.SystemWeb.csproj">
+    <ProjectReference Include="..\..\SignalR.Compression.Server.SystemWeb\SignalR.Compression.Server.SystemWeb.csproj">
       <Project>{b874ab95-d7dd-404b-ac0d-9cf150dd4a3b}</Project>
       <Name>SignalR.Compression.Server.SystemWeb</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SignalR.Compression.Server\SignalR.Compression.Server.csproj">
+    <ProjectReference Include="..\..\SignalR.Compression.Server\SignalR.Compression.Server.csproj">
       <Project>{b038c58a-bafe-4e59-91d3-563ef7d71992}</Project>
       <Name>SignalR.Compression.Server</Name>
     </ProjectReference>
