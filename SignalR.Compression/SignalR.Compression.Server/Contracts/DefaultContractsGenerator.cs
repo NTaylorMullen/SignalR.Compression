@@ -159,9 +159,7 @@ namespace SignalR.Compression.Server
             var methodInvokerContracts = CreateMethodInvokerContracts(payloadProvider, methodProvider, hubProvider);
 
             var payloadContracts = CreatePayloadContracts(payloadProvider);
-            // Format is:
-            // [0] = Methods that return a contractable type (Used for Hub Responses)
-            // [1] = Payload contracts
+
             return new object[] { methodReturnContracts, methodInvokerContracts, payloadContracts };
         }
 
