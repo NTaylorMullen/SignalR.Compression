@@ -7,7 +7,7 @@ namespace SignalR.Compression.Server
     public interface IPayloadDescriptorProvider
     {
         /// <summary>
-        /// Retrieve all avaiable payload types.
+        /// Retrieve all available payload types.
         /// </summary>
         /// <returns>Collection of payload descriptors.</returns>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This call might be expensive")]

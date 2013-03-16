@@ -11,7 +11,10 @@ namespace SignalR.Compression.Server
 {
     public class CompressionBase
     {
-        internal void CompressPayloads()
+        /// <summary>
+        /// Register the PayloadCompressionModule and all required dependency resolver pieces.
+        /// </summary>
+        public void CompressPayloads()
         {
             var resolver = GlobalHost.DependencyResolver;
 
