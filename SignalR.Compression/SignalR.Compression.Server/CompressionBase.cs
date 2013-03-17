@@ -6,13 +6,15 @@ namespace SignalR.Compression.Server
 {
     public class CompressionBase
     {
+        public void CompressPayloads()
+        {
+            CompressPayloads(GlobalHost.DependencyResolver);
+        }
         /// <summary>
         /// Register the PayloadCompressionModule and all required dependency resolver pieces.
         /// </summary>
-        public void CompressPayloads()
+        public void CompressPayloads(IDependencyResolver resolver)
         {
-            var resolver = GlobalHost.DependencyResolver;
-
             var payloadDescriptorProvider = new Lazy<ReflectedPayloadDescriptorProvider>(() => new ReflectedPayloadDescriptorProvider(resolver));
             resolver.Register(typeof(IPayloadDescriptorProvider), () => payloadDescriptorProvider.Value);
 
