@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
-using SignalR.Compression.AspNet.Samples.Payloads;
+using SignalR.Compression.Tests.Common.Payloads;
 
 namespace SignalR.Compression.AspNet.Samples.MethodInvocation
 {
@@ -14,13 +14,13 @@ namespace SignalR.Compression.AspNet.Samples.MethodInvocation
             {
                 Mother = new Parent
                 {
-                    FirstName="Mom",
-                    Age=62
+                    FirstName = "Mom",
+                    Age = 62
                     // TODO: Allow for semi-recursive loops, aka adding the top level parent as a Child of "Mom"
                 },
-                FirstName="John",
-                LastName="Doe",
-                Age=36,
+                FirstName = "John",
+                LastName = "Doe",
+                Age = 36,
                 Children = new Person[]{
                     new Person
                     {

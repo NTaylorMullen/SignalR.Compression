@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using SignalR.Compression.Server;
 
-namespace SignalR.Compression.AspNet.Samples.Payloads
+namespace SignalR.Compression.Tests.Common.Payloads
 {
     [Payload]
     public class Student : Person

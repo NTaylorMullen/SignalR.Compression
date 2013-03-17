@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SignalR.Compression.Server;
 
-namespace SignalR.Compression.AspNet.Samples.Payloads
+namespace SignalR.Compression.Tests.Common.Payloads
 {
     [Payload]
     public class Teacher : Person

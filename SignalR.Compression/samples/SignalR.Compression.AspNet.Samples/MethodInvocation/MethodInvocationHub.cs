@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Hubs;
-using SignalR.Compression.AspNet.Samples.Payloads;
+using SignalR.Compression.Tests.Common.Payloads;
 
 namespace SignalR.Compression.AspNet.Samples.MethodInvocation
 {

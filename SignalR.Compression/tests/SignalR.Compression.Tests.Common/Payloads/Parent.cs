@@ -1,8 +1,7 @@
 ﻿using SignalR.Compression.Server;
 
-namespace SignalR.Compression.AspNet.Samples.Payloads
-{
-    [Payload]
+namespace SignalR.Compression.Tests.Common.Payloads
+{    
     public class Parent : Person
     {
         public Parent Mother { get; set; }
