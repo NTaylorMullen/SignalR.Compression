@@ -5,7 +5,7 @@ namespace SignalR.Compression.Server
     /// <summary>
     /// Apply to classes or interfaces that represent data to be sent down to client
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class PayloadAttribute : Attribute
     {
         public PayloadAttribute()
