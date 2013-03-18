@@ -22,6 +22,21 @@ namespace SignalR.Compression.Server.Tests
         }
 
         [Fact]
+        public void PayloadDescriptorsHaveCorrectCompressionSettings()
+        {
+            var provider = BuildPayloadDescriptorProvider();
+            var payload = provider.GetPayload(typeof(Person));
+
+            Assert.NotNull(payload);
+            Assert.Equal(payload.Settings.DigitsToMaintain, -1);
+
+            payload = provider.GetPayload(typeof(Teacher));
+
+            Assert.NotNull(payload);
+            Assert.Equal(payload.Settings.DigitsToMaintain, 3);
+        }
+
+        [Fact]
         public void DoesNotFindClassesWithoutPayloadAttribute()
         {
             var provider = BuildPayloadDescriptorProvider();

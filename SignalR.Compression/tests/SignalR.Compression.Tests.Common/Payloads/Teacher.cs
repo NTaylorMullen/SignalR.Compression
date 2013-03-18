@@ -3,7 +3,7 @@ using SignalR.Compression.Server;
 
 namespace SignalR.Compression.Tests.Common.Payloads
 {
-    [Payload]
+    [Payload(DigitsToMaintain = 3)]
     public class Teacher : Person
     {
         public List<Student> Students { get; set; }
