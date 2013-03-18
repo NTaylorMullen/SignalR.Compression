@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Linq;
 using Microsoft.AspNet.SignalR;
 using SignalR.Compression.Tests.Common.Payloads;
 using Xunit;

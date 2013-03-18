@@ -1,5 +1,4 @@
 ﻿using System;
-using SignalR.Compression.Server;
 using SignalR.Compression.Tests.Common.Payloads;
 using Xunit;
 
