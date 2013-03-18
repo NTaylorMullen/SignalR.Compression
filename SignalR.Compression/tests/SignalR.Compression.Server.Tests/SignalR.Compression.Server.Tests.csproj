@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataDescriptorFacts.cs" />
     <Compile Include="PayloadProviderFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
