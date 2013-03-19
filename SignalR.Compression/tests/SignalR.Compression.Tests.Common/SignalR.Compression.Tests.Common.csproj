@@ -60,6 +60,7 @@
     <Compile Include="Payloads\Student.cs" />
     <Compile Include="Payloads\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\TestData.cs" />
     <Compile Include="Utilities\TestUtilities.cs" />
   </ItemGroup>
   <ItemGroup>

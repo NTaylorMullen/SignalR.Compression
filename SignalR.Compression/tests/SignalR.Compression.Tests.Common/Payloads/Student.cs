@@ -6,7 +6,7 @@ using SignalR.Compression.Server;
 
 namespace SignalR.Compression.Tests.Common.Payloads
 {
-    [Payload]
+    [Payload(DigitsToMaintain=2)]
     public class Student : Person
     {
         public double GPA { get; set; }
