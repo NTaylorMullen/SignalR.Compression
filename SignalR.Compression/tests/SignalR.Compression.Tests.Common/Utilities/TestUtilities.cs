@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
 using SignalR.Compression.Server;
 using Xunit;
 
@@ -22,12 +23,32 @@ namespace SignalR.Compression.Tests.Common.Utilities
             }
         }
 
-        public static IPayloadDescriptorProvider BuildPayloadDescriptorProvider()
+        public static IDependencyResolver BuildCompressionDependencyResolver()
         {
             var resolver = new DefaultDependencyResolver();
             resolver.Compression().CompressPayloads(resolver);
 
-            return resolver.Resolve<IPayloadDescriptorProvider>();
+            return resolver;
+        }
+
+        public static IPayloadDescriptorProvider BuildPayloadDescriptorProvider()
+        {
+            return BuildCompressionDependencyResolver().Resolve<IPayloadDescriptorProvider>();
+        }
+
+        public static IPayloadCompressor BuildPayloadCompressor()
+        {
+            return BuildCompressionDependencyResolver().Resolve<IPayloadCompressor>();
+        }
+
+        public static IPayloadDecompressor BuildPayloadDecompressor()
+        {
+            return BuildCompressionDependencyResolver().Resolve<IPayloadDecompressor>();
+        }
+
+        public static IParameterResolver BuildCompressableParameterResolver()
+        {
+            return BuildCompressionDependencyResolver().Resolve<IParameterResolver>();
         }
     }
 }
