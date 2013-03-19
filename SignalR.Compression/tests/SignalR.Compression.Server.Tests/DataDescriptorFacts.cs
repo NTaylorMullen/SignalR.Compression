@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Microsoft.AspNet.SignalR;
 using SignalR.Compression.Tests.Common.Payloads;
+using SignalR.Compression.Tests.Common.Utilities;
 using Xunit;
 
 namespace SignalR.Compression.Server.Tests
@@ -10,7 +10,7 @@ namespace SignalR.Compression.Server.Tests
         [Fact]
         public void CanSetValuesOnObject()
         {
-            var provider = BuildPayloadDescriptorProvider();
+            var provider = TestUtilities.BuildPayloadDescriptorProvider();
             var type = typeof(Parent);
             var firstName = "Betty";
             var payload = provider.GetPayload(type);
@@ -27,7 +27,7 @@ namespace SignalR.Compression.Server.Tests
         [Fact]
         public void CanGetValuesOnObject()
         {
-            var provider = BuildPayloadDescriptorProvider();
+            var provider = TestUtilities.BuildPayloadDescriptorProvider();
             var type = typeof(Parent);
             var payload = provider.GetPayload(type);
             var descriptor = payload.Data.Where(data => data.Name == "FirstName").FirstOrDefault();
@@ -39,14 +39,6 @@ namespace SignalR.Compression.Server.Tests
             Assert.NotNull(descriptor);
 
             Assert.Equal(descriptor.GetValue(mother), mother.FirstName);
-        }
-
-        private IPayloadDescriptorProvider BuildPayloadDescriptorProvider()
-        {
-            var resolver = new DefaultDependencyResolver();
-            resolver.Compression().CompressPayloads(resolver);
-
-            return resolver.Resolve<IPayloadDescriptorProvider>();
         }
     }
 }
