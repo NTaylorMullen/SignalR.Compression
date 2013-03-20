@@ -5,7 +5,7 @@ testUtilities.runWithAllTransports(function (transport) {
         var connection = testUtilities.createHubConnection(end, assert, testName);
 
         connection.start({ transport: transport }).done(function () {
-            assert.ok(connection.compression._.contracts, "Contracts object exists in private compression data.");
+            assert.isSet(connection.compression._.contracts, "Contracts object exists in private compression data.");
 
             end();
         });
@@ -26,11 +26,11 @@ testUtilities.runWithAllTransports(function (transport) {
             assert.equal(typeof payloadContracts, "object", "Payload contracts are an object.");
 
             for (var hubName in methodReturnContracts) {
-                assert.ok($.connection[hubName], "Hub " + hubName + " exists on $.connection for method return contracts.");
+                assert.isSet($.connection[hubName], "Hub " + hubName + " exists on $.connection for method return contracts.");
             }
 
             for (var hubName in methodInvokerContracts) {
-                assert.ok($.connection[hubName], "Hub " + hubName + " exists on $.connection for method invoker contracts.");
+                assert.isSet($.connection[hubName], "Hub " + hubName + " exists on $.connection for method invoker contracts.");
             }
 
             end();

@@ -103,6 +103,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Styles\qunit.css" />
     <Content Include="Tests\FunctionalTests\ContractRetrieverFacts.js" />
+    <Content Include="Tests\UnitTests\SignalRCompressionFacts.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
