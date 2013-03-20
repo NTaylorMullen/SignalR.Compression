@@ -20,7 +20,7 @@ namespace SignalR.Compression.Server.Tests
         }
 
         [Fact]
-        public void CompressesComplexPayloadCorrectly()
+        public void CompressesComplexPayloadsCorrectly()
         {
             var compressor = TestUtilities.BuildPayloadCompressor();
             var serializer = TestUtilities.BuildJsonSerializer();

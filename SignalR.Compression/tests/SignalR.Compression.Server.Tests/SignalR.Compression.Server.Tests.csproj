@@ -61,6 +61,7 @@
     <Compile Include="CompressionTypeHelperFacts.cs" />
     <Compile Include="DataDescriptorFacts.cs" />
     <Compile Include="PayloadCompressorFacts.cs" />
+    <Compile Include="PayloadDecompressorFacts.cs" />
     <Compile Include="PayloadProviderFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeExtensionFacts.cs" />
