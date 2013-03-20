@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json.Linq;
 
@@ -48,11 +49,11 @@ namespace SignalR.Compression.Server
 
                 if (value != null)
                 {
-                    if (_provider.IsPayload(data.Type))
+                    if (_provider.HasPayload(data.Type))
                     {
-                        data.SetValue(result, Decompress((value as JArray).ToObject<object[]>(), data.Type));
+                        data.SetValue(result, Decompress(ConvertToObjectArray(value), data.Type));
                     }
-                    else
+                    else // We're not directly a payload at this points
                     {
                         if (value.GetType() != data.Type)
                         {
@@ -89,12 +90,32 @@ namespace SignalR.Compression.Server
                 {
                     if (enumerable)
                     {
-                        var list = Activator.CreateInstance(expected) as IList;
+                        IList list = null;
+
+                        // Arrays have no default constructor so cannot be created by the Activator
+                        if (expected.IsArray)
+                        {
+                            list = new List<object>();
+                        }
+                        else
+                        {
+                            list = Activator.CreateInstance(expected) as IList;
+                        }
+
                         var compressedPayload = payload as object[];
 
                         foreach (object data in compressedPayload)
                         {
-                            list.Add(Decompress((data as JArray).ToObject<object[]>(), payloadDescriptor));
+                            list.Add(Decompress(ConvertToObjectArray(data), payloadDescriptor));
+                        }
+
+                        if (expected.IsArray)
+                        {
+                            var arr = Array.CreateInstance(expected.GetEnumerableType(), list.Count);
+
+                            list.CopyTo(arr, 0);
+
+                            return arr;
                         }
 
                         return list;
@@ -107,6 +128,16 @@ namespace SignalR.Compression.Server
             }
 
             return payload;
+        }
+
+        private object[] ConvertToObjectArray(object data)
+        {
+            if (data.GetType() != typeof(JArray))
+            {
+                return data as object[];
+            }
+
+            return (data as JArray).ToObject<object[]>();
         }
     }
 }
