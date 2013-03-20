@@ -10,6 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Compression.Server.Tests", "tests\SignalR.Compression.Server.Tests\SignalR.Compression.Server.Tests.csproj", "{F63F4E9D-EFCC-4777-B147-051707B0BB8B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Compression.Client.JS.Tests", "tests\SignalR.Compression.Client.JS.Tests\SignalR.Compression.Client.JS.Tests.csproj", "{198E37B7-8004-4CCC-9E61-6DAF13AD931C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F74C4622-3244-4BB5-BFE7-2AA14F492096} = {F74C4622-3244-4BB5-BFE7-2AA14F492096}
+		{B038C58A-BAFE-4E59-91D3-563EF7D71992} = {B038C58A-BAFE-4E59-91D3-563EF7D71992}
+		{B874AB95-D7DD-404B-AC0D-9CF150DD4A3B} = {B874AB95-D7DD-404B-AC0D-9CF150DD4A3B}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0C8D1447-A7B9-42E1-8E69-F788A859E041}"
 	ProjectSection(SolutionItems) = preProject

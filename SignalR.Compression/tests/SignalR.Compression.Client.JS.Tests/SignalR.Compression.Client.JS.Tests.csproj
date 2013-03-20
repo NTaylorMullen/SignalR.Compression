@@ -88,6 +88,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
@@ -96,11 +97,17 @@
     <Content Include="Scripts\jquery.signalR-1.0.1.js" />
     <Content Include="Scripts\jquery.signalR-1.0.1.min.js" />
     <Content Include="Scripts\jquery.signalR.compression.js" />
+    <Content Include="Scripts\qunit.extensions.js" />
     <Content Include="Scripts\qunit.js" />
+    <Content Include="Scripts\test.utilities.js" />
+    <Content Include="Scripts\_references.js" />
     <Content Include="Styles\qunit.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +118,24 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\samples\SignalR.Compression.AspNet.Samples\SignalR.Compression.AspNet.Samples.csproj">
+      <Project>{adc4977f-1594-41d9-a014-8b1f793a60e3}</Project>
+      <Name>SignalR.Compression.AspNet.Samples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SignalR.Compression.Server.SystemWeb\SignalR.Compression.Server.SystemWeb.csproj">
+      <Project>{b874ab95-d7dd-404b-ac0d-9cf150dd4a3b}</Project>
+      <Name>SignalR.Compression.Server.SystemWeb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SignalR.Compression.Server\SignalR.Compression.Server.csproj">
+      <Project>{b038c58a-bafe-4e59-91d3-563ef7d71992}</Project>
+      <Name>SignalR.Compression.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SignalR.Compression.Tests.Common\SignalR.Compression.Tests.Common.csproj">
+      <Project>{7c4099b2-1c8c-4d0e-8219-6a3efb6e72ab}</Project>
+      <Name>SignalR.Compression.Tests.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests\" />
