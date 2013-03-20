@@ -1,4 +1,6 @@
-﻿testUtilities.runWithAllTransports(function (transport) {
+﻿QUnit.module("Contract Retriever Facts")
+
+testUtilities.runWithAllTransports(function (transport) {
     QUnit.asyncTimeoutTest(transport + " transport is able to retrieve contracts from endpoint with hub connection.", testUtilities.defaultTestTimeout, function (end, assert, testName) {
         var connection = testUtilities.createHubConnection(end, assert, testName);
 
