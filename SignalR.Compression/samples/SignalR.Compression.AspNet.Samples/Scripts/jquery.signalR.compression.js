@@ -266,7 +266,6 @@
                 dataType = "jsonp";
             }
 
-            //
             if (url.toLowerCase().indexOf("/signalr", url.length - 8) !== -1) {
                 url = url.substr(0, url.length - 8);
             }
