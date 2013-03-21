@@ -266,7 +266,6 @@
                 dataType = "jsonp";
             }
 
-            //
             if (url.toLowerCase().indexOf("/signalr", url.length - 8) !== -1) {
                 url = url.substr(0, url.length - 8);
             }
@@ -326,7 +325,8 @@
 
         proxy.invoke = function (methodName) {
             var contracts = compressionData.contracts,
-                methodArgs = $.makeArray(arguments);
+                // Copy the argument so we don't modify existing value
+                methodArgs = $.extend(true, [], arguments);
 
             if (contracts) {
                 var returnContracts = contracts[0][hubName],
@@ -335,8 +335,8 @@
                     contractId,
                     contract,
                     enumerable,
-                    enumerated;
-
+                    enumerated,
+                    arg;
 
                 // Check if we need to return a result
                 if (returnContracts && returnContracts[methodName]) {
@@ -350,6 +350,7 @@
                     invokeContractData = invokeContracts[methodName];
 
                     for (var i = 1; i < methodArgs.length; i++) {
+                        arg = methodArgs[i];
                         contractId = invokeContractData[i - 1][0];
                         enumerable = invokeContractData[i - 1][1];
 
@@ -359,14 +360,14 @@
                             if (enumerable) {
                                 enumerated = [];
 
-                                for (var j = 0; j < methodArgs[i].length; j++) {
-                                    enumerated.push(compressor.compress(methodArgs[i][j], contract, contracts));
+                                for (var j = 0; j < arg.length; j++) {
+                                    enumerated.push(compressor.compress(arg[j], contract, contracts));
                                 }
 
                                 methodArgs[i] = enumerated;
                             }
                             else {
-                                methodArgs[i] = compressor.compress(methodArgs[i], contract, contracts);
+                                methodArgs[i] = compressor.compress(arg, contract, contracts);
                             }
                         }
                     }

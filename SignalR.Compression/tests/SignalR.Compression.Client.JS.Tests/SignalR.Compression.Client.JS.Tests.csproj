@@ -102,6 +102,7 @@
     <Content Include="Scripts\test.utilities.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Styles\qunit.css" />
+    <Content Include="Tests\FunctionalTests\MethodInvokerFacts.js" />
     <Content Include="Tests\UnitTests\CompressorFacts.js" />
     <Content Include="Tests\FunctionalTests\ContractRetrieverFacts.js" />
     <Content Include="Tests\UnitTests\DecompressorFacts.js" />
@@ -198,6 +199,7 @@
       <Output PropertyName="JSTests" TaskParameter="ScriptTagsOutput" />
     </BuildScriptTags>
     <FileUpdate Files="index.html" Regex="&lt;!-- ##JS## --&gt;((.|\r|\n)*?)&lt;!-- ##JS## --&gt;" ReplacementText="&lt;!-- ##JS## --&gt;$(JSTests)&lt;!-- ##JS## --&gt;" Condition=" '$(OS)' == 'Windows_NT'" />
+  <Copy SourceFiles="$(SolutionDir)SignalR.Compression.Client.JS\bin\jquery.signalR.compression.js" DestinationFiles="Scripts\jquery.signalR.compression.js" Condition=" '$(OS)' == 'Windows_NT' " />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

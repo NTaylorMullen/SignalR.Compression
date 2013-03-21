@@ -9,6 +9,10 @@ testUtilities.runWithAllTransports(function (transport) {
 
             end();
         });
+
+        return function () {
+            connection.stop();
+        };
     });
 
     QUnit.asyncTimeoutTest(transport + " transport is able to retrieve contracts in correct format", testUtilities.defaultTestTimeout, function (end, assert, testName) {
@@ -35,5 +39,9 @@ testUtilities.runWithAllTransports(function (transport) {
 
             end();
         });
+
+        return function () {
+            connection.stop();
+        };
     });
 });
