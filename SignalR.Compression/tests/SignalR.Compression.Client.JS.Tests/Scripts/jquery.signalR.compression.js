@@ -141,7 +141,7 @@
                             convertToZero = !utilities.isNumeric(compressionTypeId);
 
                         // Check the payload type of the parameter, if it's a payload we need to recursively compress it
-                        if (uncompressed[i] && utilities.isPayload(payloadId, contracts)) {
+                        if (uncompressed[propertyName] && utilities.isPayload(payloadId, contracts)) {
                             if (enumerable) {
                                 enumerated = [];
 
@@ -149,7 +149,7 @@
                                     enumerated[j] = that.compress(uncompressed[propertyName][j], utilities.getContract(payloadId, contracts), contracts);
                                 }
 
-                                result[propertyName].push(enumerated);
+                                result.push(enumerated);
                             }
                             else {
                                 result.push(that.compress(uncompressed[propertyName], utilities.getContract(payloadId, contracts), contracts));
