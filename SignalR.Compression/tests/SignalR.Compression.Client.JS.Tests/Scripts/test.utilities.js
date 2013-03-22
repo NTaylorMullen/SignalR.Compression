@@ -1,4 +1,6 @@
-﻿var testUtilities;
+﻿window.document.testUrl = "auto";
+
+var testUtilities;
 
 (function ($, window) {
     var ios = !!navigator.userAgent.match(/iPod|iPhone|iPad/),

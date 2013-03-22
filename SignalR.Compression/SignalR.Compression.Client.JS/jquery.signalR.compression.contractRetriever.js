@@ -30,11 +30,11 @@
                 dataType = "jsonp";
             }
 
-            if (url.toLowerCase().indexOf("/signalr", url.length - 8) !== -1) {
-                url = url.substr(0, url.length - 8);
+            if (url.toLowerCase().indexOf("signalr", url.length - 7) !== -1) {
+                url = url.substr(0, url.length - 7);
             }
 
-            url += "/compression/contracts";
+            url += "compression/contracts";
 
             $.ajax({
                 url: url,
