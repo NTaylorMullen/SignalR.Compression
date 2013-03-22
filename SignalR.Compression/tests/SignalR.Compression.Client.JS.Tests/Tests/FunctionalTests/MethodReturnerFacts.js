@@ -1,4 +1,4 @@
-﻿QUnit.module("Method Returner Facts")
+﻿QUnit.module("Method Returner Facts");
 
 testUtilities.runWithAllTransports(function (transport) {
     QUnit.asyncTimeoutTest(transport + " transport is able to get a parent from the server.", testUtilities.defaultTestTimeout, function (end, assert, testName) {
@@ -36,7 +36,7 @@ testUtilities.runWithAllTransports(function (transport) {
 
         QUnit.expect(2);
 
-        $.connection.hub.compression.methodResponse(function (result) {
+        connection.compression.methodResponse(function (result) {
             assert.equal(window.JSON.stringify(result), window.JSON.stringify(compressedParent), "Parent is compressed upon receiving a response from a method invocation.");
         });
 
@@ -83,7 +83,7 @@ testUtilities.runWithAllTransports(function (transport) {
 
         QUnit.expect(2);
 
-        $.connection.hub.compression.methodResponse(function (result) {
+        connection.compression.methodResponse(function (result) {
             assert.equal(window.JSON.stringify(result), window.JSON.stringify(compressedTeacher), "Teacher is compressed upon receiving a response from a method invocation.");
         });
 

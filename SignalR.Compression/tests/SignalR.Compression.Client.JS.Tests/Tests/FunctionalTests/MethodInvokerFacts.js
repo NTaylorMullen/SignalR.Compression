@@ -59,13 +59,13 @@ testUtilities.runWithAllTransports(function (transport) {
             end();
         };
 
-        $.connection.hub.compression.serverInvokingClient(function (methodName, args) {
+        connection.compression.serverInvokingClient(function (methodName, args) {
             // Gets rounded to 2 decimal places on server
             compressedStudent[3] = 1.34;
             assert.equal(window.JSON.stringify(args), window.JSON.stringify(compressedStudent), "Server compresses data properly prior to client decompressing.");
         });
 
-        $.connection.hub.compression.invokingServerMethod(function (methodName, args) {
+        connection.compression.invokingServerMethod(function (methodName, args) {
             assert.equal(window.JSON.stringify(args), window.JSON.stringify(compressedStudent), "Client compresses data properly prior to sending data to server.");
         });
 

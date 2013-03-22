@@ -107,6 +107,7 @@
     <Content Include="Tests\UnitTests\CompressorFacts.js" />
     <Content Include="Tests\FunctionalTests\ContractRetrieverFacts.js" />
     <Content Include="Tests\UnitTests\DecompressorFacts.js" />
+    <Content Include="Tests\UnitTests\EventFacts.js" />
     <Content Include="Tests\UnitTests\SignalRCompressionFacts.js" />
     <Content Include="Tests\UnitTests\UtilityFacts.js" />
     <Content Include="Web.config" />

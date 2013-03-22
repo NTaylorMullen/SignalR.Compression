@@ -7,6 +7,7 @@
 
     var signalR = $.signalR,
         hubConnection = $.hubConnection,
+        savedHubConnectionInit = hubConnection.fn.init,
         events = {
             onMethodResponse: "OnMethodResponse", // Triggers when a server returns a value from the server (passes compressed data)
             onInvokingServerMethod: "OnInvokingServerMethod", // Triggers when the client invokes a method on the server (passes compressed arguments)
@@ -22,8 +23,8 @@
             events: events
         };
 
-    $.extend(hubConnection.fn, {
-        compression: {
+    hubConnection.fn.init = function () {
+        this.compression = {
             _: {
                 decompressResult: [], // Array of Booleans representing if we should decompress an invocation result,
                 contracts: {} // Contracts to abide by when sending/receiving data
@@ -32,35 +33,38 @@
                 /// <summary>Adds a callback that will be invoked when the server returns a value from the server (passes compressed data).</summary>
                 /// <param name="callback" type="Function">A callback to execute when a server method returns a value</param>
                 /// <returns type="signalR" />
-                var connection = this;
-                $(connection).bind(events.onMethodResponse, function (e, result) {
-                    callback.call(connection, result);
+                var compression = this;
+                $(compression).bind(events.onMethodResponse, function (e, result) {
+                    callback.call(compression, result);
                 });
-                return connection;
+                return compression;
             },
             invokingServerMethod: function (callback) {
                 /// <summary>Adds a callback that will be invoked when the client invokes a method on the server (passes compressed arguments).</summary>
                 /// <param name="callback" type="Function">A callback to execute when the client invokes a server method</param>
                 /// <returns type="signalR" />
-                var connection = this;
-                $(connection).bind(events.onInvokingServerMethod, function (e, methodName, args) {
-                    callback.call(connection, methodName, args);
+                var compression = this;
+                $(compression).bind(events.onInvokingServerMethod, function (e, methodName, args) {
+                    callback.call(compression, methodName, args);
                 });
-                return connection;
+                return compression;
             },
             serverInvokingClient: function (callback) {
                 /// <summary>Adds a callback that will be invoked when the server invokes a method on the client (passes compressed arguments).</summary>
                 /// <param name="callback" type="Function">A callback to execute when the server invokes a client method</param>
                 /// <returns type="signalR" />
-                var connection = this;
-                $(connection).bind(events.onServerInvokingClient, function (e, methodName, args) {
-                    callback.call(connection, methodName, args);
+                var compression = this;
+                $(compression).bind(events.onServerInvokingClient, function (e, methodName, args) {
+                    callback.call(compression, methodName, args);
                 });
-                return connection;
+                return compression;
             }
-        }
-    });
+        };
 
+        savedHubConnectionInit.apply(this, arguments);
+    };
+
+    hubConnection.fn.init.prototype = savedHubConnectionInit.prototype;
     signalR.compression = compression;
 
 }(window.jQuery, window));
