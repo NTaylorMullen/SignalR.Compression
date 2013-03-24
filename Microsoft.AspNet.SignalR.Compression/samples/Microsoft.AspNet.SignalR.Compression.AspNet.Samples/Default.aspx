@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Microsoft.AspNet.SignalR.Compression.AspNet.Samples.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Microsoft.AspNet.SignalR.Compression.AspNet.Samples.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SignalR.Compression.AspNet.Samples.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Microsoft.AspNet.SignalR.Compression.AspNet.Samples.Default" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="hero-unit">

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Microsoft.AspNet.SignalR.Compression.AspNet.Samples.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Microsoft.AspNet.SignalR.Compression.AspNet.Samples.MethodReturner.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SignalR.Compression.AspNet.Samples.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Microsoft.AspNet.SignalR.Compression.AspNet.Samples.MethodReturner.Default" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <ul class="breadcrumb">

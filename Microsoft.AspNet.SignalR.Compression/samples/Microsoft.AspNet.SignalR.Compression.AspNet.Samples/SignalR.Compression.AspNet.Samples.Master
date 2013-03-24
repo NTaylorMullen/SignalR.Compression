@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Microsoft.AspNet.SignalR.Compression.AspNet.Samples.master.cs" Inherits="Microsoft.AspNet.SignalR.Compression.AspNet.Samples.SignalR_Compression_AspNet_Samples" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SignalR.Compression.AspNet.Samples.master.cs" Inherits="Microsoft.AspNet.SignalR.Compression.AspNet.Samples.SignalR_Compression_AspNet_Samples" %>
 
 <!DOCTYPE html>
 
