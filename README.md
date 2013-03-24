@@ -197,3 +197,7 @@ protected void Application_Start(object sender, EventArgs e)
 **RoundNumbersTo**: Forces all numeric members to be rounded to the specified number of digits. Defaults to -1 (will not round).
 
 ***More payload attribute options will be added in the future.***
+
+## FAQ
+### If I send an IEnumerable<SomePayloadType> over the wire will it be compressed?
+Yes it will.
