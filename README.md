@@ -193,3 +193,7 @@ protected void Application_Start(object sender, EventArgs e)
 *For additional samples check out the Samples within the SignalR.Compression source.*
 
 ## Advanced topics
+### Payload Attribute Options
+**RoundNumbersTo**: Forces all numeric members to be rounded to the specified number of digits. Defaults to -1 (will not round).
+
+***More payload attribute options will be added in the future.***
