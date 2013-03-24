@@ -9,6 +9,7 @@ Lets take an existing ASP.NET SignalR application for chatting:
 
 **Server**
 ```csharp
+...
 public class MyHub : Hub
 {
     public void BroadcastMessage(string from, string content)
@@ -28,19 +29,22 @@ public class Message
     public string From { get; set; }
     public string Content { get; set; }
 }
+...
 ```
 
 **Application Start**
 ```csharp
+...
 protected void Application_Start(object sender, EventArgs e)
 {    
     RouteTable.Routes.MapHubs();
 }
+...
 ```
 
 **Client**
 ```html
-<!-- This is all in an html body -->
+...
 <div id="messages"></div>
 <p><strong>From:</strong> <input type="text" id="messageFrom" value="John" /></p>
 <p><strong>Message:</strong> <input type="text" id="messageContent" value="Hello World!" /></p>
@@ -62,6 +66,7 @@ protected void Application_Start(object sender, EventArgs e)
     });
   });
 </script>
+...
 ```
 
 ***So what's happening?***  Clicking the "Send" button results in ASP.NET SignalR using JSON.NET to stringify the Message object and then send it over the wire to all clients.
@@ -120,6 +125,7 @@ public class Message
 
 **Server**
 ```csharp
+...
 public class ChatHub : Hub
 {
     public void BroadcastMessage(string from, string content)
@@ -140,20 +146,23 @@ public class Message
     public string From { get; set; }
     public string Content { get; set; }
 }
+...
 ```
 
 **Application Start**
 ```csharp
+...
 protected void Application_Start(object sender, EventArgs e)
 {    
     GlobalHost.DependencyResolver.Compression().CompressPayloads(RouteTable.Routes);
     RouteTable.Routes.MapHubs();
 }
+...
 ```
 
 **Client**
 ```html
-<!-- This is all in an html body -->
+...
 <div id="messages"></div>
 <p><strong>From:</strong> <input type="text" id="messageFrom" value="John" /></p>
 <p><strong>Message:</strong> <input type="text" id="messageContent" value="Hello World!" /></p>
@@ -176,4 +185,7 @@ protected void Application_Start(object sender, EventArgs e)
     });
   });
 </script>
+...
 ```
+
+*For additional samples check out the Samples within the SignalR.Compression source.*
