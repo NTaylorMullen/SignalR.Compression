@@ -38,7 +38,7 @@ namespace Microsoft.AspNet.SignalR.Compression.Server
                     ID = Interlocked.Increment(ref _payloadDescriptorID),
                     Settings = new CompressionSettings
                     {
-                        DigitsToMaintain = ((PayloadAttribute)Attribute.GetCustomAttribute(type, typeof(PayloadAttribute))).DigitsToMaintain
+                        RoundNumbersTo = ((PayloadAttribute)Attribute.GetCustomAttribute(type, typeof(PayloadAttribute))).RoundNumbersTo
                     },
                     Data = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                .Select(propertyInfo =>

@@ -25,12 +25,12 @@ namespace Microsoft.AspNet.SignalR.Compression.Server.Tests
             var payload = provider.GetPayload(typeof(Person));
 
             Assert.NotNull(payload);
-            Assert.Equal(payload.Settings.DigitsToMaintain, -1);
+            Assert.Equal(payload.Settings.RoundNumbersTo, -1);
 
             payload = provider.GetPayload(typeof(Teacher));
 
             Assert.NotNull(payload);
-            Assert.Equal(payload.Settings.DigitsToMaintain, 3);
+            Assert.Equal(payload.Settings.RoundNumbersTo, 3);
         }
 
         [Fact]

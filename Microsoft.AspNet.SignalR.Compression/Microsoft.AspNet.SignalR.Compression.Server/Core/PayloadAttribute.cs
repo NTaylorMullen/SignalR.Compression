@@ -10,13 +10,13 @@ namespace Microsoft.AspNet.SignalR.Compression.Server
     {
         public PayloadAttribute()
         {
-            DigitsToMaintain = CompressionSettings.Default.DigitsToMaintain;
+            RoundNumbersTo = CompressionSettings.Default.RoundNumbersTo;
         }
 
         /// <summary>
         /// Determines how numbers are compressed via rounding.  
         /// Default is to not remove any digits after the decimal point (-1).
         /// </summary>
-        public int DigitsToMaintain { get; set; }
+        public int RoundNumbersTo { get; set; }
     }
 }

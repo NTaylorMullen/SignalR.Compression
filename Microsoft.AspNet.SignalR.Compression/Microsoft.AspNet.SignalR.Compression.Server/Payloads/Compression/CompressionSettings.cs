@@ -5,9 +5,9 @@ namespace Microsoft.AspNet.SignalR.Compression.Server
     {
         public static CompressionSettings Default = new CompressionSettings
         {
-            DigitsToMaintain = -1
+            RoundNumbersTo = -1
         };
 
-        public int DigitsToMaintain { get; set; }
+        public int RoundNumbersTo { get; set; }
     }
 }

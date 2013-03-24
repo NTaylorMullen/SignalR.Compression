@@ -24,15 +24,15 @@ namespace Microsoft.AspNet.SignalR.Compression.Server
         {
             var payloadType = payload.GetType();
 
-            if (settings.DigitsToMaintain >= 0 && payloadType.CanBeRounded())
+            if (settings.RoundNumbersTo >= 0 && payloadType.CanBeRounded())
             {
                 if (payloadType != typeof(double))
                 {
-                    payload = Math.Round((decimal)payload, settings.DigitsToMaintain);
+                    payload = Math.Round((decimal)payload, settings.RoundNumbersTo);
                 }
                 else
                 {
-                    payload = Math.Round((double)payload, settings.DigitsToMaintain);
+                    payload = Math.Round((double)payload, settings.RoundNumbersTo);
                 }
             }
 

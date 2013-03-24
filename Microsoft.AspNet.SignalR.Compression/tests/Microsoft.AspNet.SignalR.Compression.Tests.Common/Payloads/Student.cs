@@ -6,7 +6,7 @@ using Microsoft.AspNet.SignalR.Compression.Server;
 
 namespace Microsoft.AspNet.SignalR.Compression.Tests.Common.Payloads
 {
-    [Payload(DigitsToMaintain=2)]
+    [Payload(RoundNumbersTo=2)]
     public class Student : Person
     {
         public double GPA { get; set; }
