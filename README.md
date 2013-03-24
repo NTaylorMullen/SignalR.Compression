@@ -201,3 +201,6 @@ protected void Application_Start(object sender, EventArgs e)
 ## FAQ
 ### If I send an IEnumerable<SomePayloadType> over the wire will it be compressed?
 Yes it will.
+
+### I keep getting a System.StackOverflowException, what's going on?
+SignalR.Compression does not defend against circular references yet.  Ensure your payloads are not referencing themselves.
