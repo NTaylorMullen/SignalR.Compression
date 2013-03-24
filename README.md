@@ -204,3 +204,6 @@ Yes it will.
 
 ### I keep getting a System.StackOverflowException, what's going on?
 SignalR.Compression does not defend against circular references yet.  Ensure your payloads are not referencing themselves.
+
+### I'm watching the data over the wire and I see a lot of 0's non numeric members.
+SignalR.Compression actually compresses null objects into 0's if they're not numeric.  When it reaches its endpoint the 0's will be decompressed back into the appropriate null values.
