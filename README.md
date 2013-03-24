@@ -4,13 +4,13 @@ SignalR.Compression is an [ASP.NET SignalR](https://github.com/SignalR/SignalR) 
 ## What can it be used for?
 It can be used on any ASP.NET SignalR application to speed the process of sending data over the wire.  Applications which have a bandwidth bottleneck will especially see benefits from SignalR.Compression.
 
-## Quick Start
+## Quick Start - Chat Application
 Lets take an existing ASP.NET SignalR application for chatting:
 
 **Server**
 ```csharp
 ...
-public class MyHub : Hub
+public class ChatHub : Hub
 {
     public void BroadcastMessage(string from, string content)
     {
@@ -54,7 +54,7 @@ protected void Application_Start(object sender, EventArgs e)
 <script type="text/javascript" src="Scripts/jquery.signalr-1.0.1.js"></script>
 <script type="text/javascript" src="signalr/hubs"></script>
 <script type="text/javascript">
-  var myHub = $.connection.myHub;
+  var chatHub = $.connection.chatHub;
   
   chatHub.client.receiveMessage = function (message) {
       $("#messages").append("<p><strong>" + message.From + ":</strong> " + message.Content + "</p>");
@@ -110,6 +110,8 @@ public class Message
 {
 ...
 ```
+
+**Note:** After declaring your payload, it will always be compressed/decompressed when sent over the wire.
 
 ### Client
 1) Add jquery.signalr.compression.js file **BEFORE** the "signalr/hubs" script. Example using the Chat Application:  
@@ -189,3 +191,5 @@ protected void Application_Start(object sender, EventArgs e)
 ```
 
 *For additional samples check out the Samples within the SignalR.Compression source.*
+
+## Advanced topics
