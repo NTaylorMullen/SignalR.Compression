@@ -16,7 +16,7 @@ public class ChatHub : Hub
     {
         Clients.All.receiveMessage(new Message(from, content));
     }
-}
+}   
 
 public class Message
 {
